@@ -51,9 +51,10 @@ button:hover {
 
 .messages {
   overflow: hidden;
-  padding: 60px 0;
+  padding: 5px 0;
   white-space: nowrap;
   position: relative;
+  width: 100%;
 }
 
 .messages:before,
@@ -82,12 +83,21 @@ button:hover {
 
 .quotes-slide {
   display: inline-block;
-  animation: 35s slide infinite linear;
+  animation: slide 35s infinite linear;
+}
+
+.quotes-slide:nth-child(2) {
+  position: absolute;
+  left: var(--slide-width);
+  top: 10px;
 }
 
 .quote {
   display: inline-block;
-  width: 300px;
+  min-width: 300px;
+  max-width: 600px;
+  width: fit-content;
+  height: 150px;
   margin-inline: 5px;
   vertical-align: top;
   white-space: normal;
@@ -96,6 +106,7 @@ button:hover {
   border-radius: 8px;
   border: 1px solid #1a1a1a;
   text-align: left;
+  overflow: hidden;
 }
 
 .quote p {
@@ -115,6 +126,6 @@ button:hover {
     transform: translateX(0);
   }
   to {
-    transform: translateX(-100%);
+    transform: translateX(calc(-1 * var(--slide-width)));
   }
 }
