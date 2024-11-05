@@ -1,0 +1,120 @@
+.container {
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+img {
+  max-width: 50px;
+  margin-bottom: 2rem;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-width: 20vw;
+  margin: 0 auto 3rem auto;
+  padding: 2rem;
+  background-color: #f5f5f5;
+  border-radius: 8px;
+  border: 1px solid #1a1a1a;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+label {
+  text-align: left;
+  font-weight: 600;
+  color: #1a1a1a;;
+}
+
+input {
+  padding: 0.8rem;
+  border: 1px solid #1a1a1a;;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+button {
+  padding: 0.8rem;
+  background-color: #414141;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+button:hover {
+  background-color: #1a1a1a;
+}
+
+.messages {
+  overflow: hidden;
+  padding: 60px 0;
+  white-space: nowrap;
+  position: relative;
+}
+
+.messages:before,
+.messages:after {
+  position: absolute;
+  top: 0;
+  width: 250px;
+  height: 100%;
+  content: "";
+  z-index: 2;
+}
+
+.messages:before {
+  left: 0;
+  border-left: 2px solid #1a1a1a;
+}
+
+.messages:after {
+  right: 0;
+  border-right: 2px solid #1a1a1a;
+}
+
+.messages:hover .quotes-slide {
+  animation-play-state: paused;
+}
+
+.quotes-slide {
+  display: inline-block;
+  animation: 35s slide infinite linear;
+}
+
+.quote {
+  display: inline-block;
+  width: 300px;
+  margin-inline: 5px;
+  vertical-align: top;
+  white-space: normal;
+  background-color: white;
+  padding: 1.5rem;
+  border-radius: 8px;
+  border: 1px solid #1a1a1a;
+  text-align: left;
+}
+
+.quote p {
+  margin: 0;
+  line-height: 1.5;
+}
+
+.quote-details {
+  margin-top: 1rem !important;
+  color: #666;
+  font-style: italic;
+  font-size: 0.9rem;
+}
+
+@keyframes slide {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}
