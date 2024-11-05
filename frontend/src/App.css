@@ -9,7 +9,7 @@ body, html {
   height: 100%;
   margin: 0;
   padding: 0;
-  overflow-x: hidden;
+  overflow: hidden;
 }
 
 .container {
@@ -37,13 +37,18 @@ body, html {
 .logo-container {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 1rem;
 }
 
 h1 {
   margin: 0;
   color: #6a6a6a;
   font-size: 2rem;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 400;
+  font-optical-sizing: auto;
+  font-style: normal;
+  letter-spacing: 0.5px;
 }
 
 .add-quote-container {
@@ -133,7 +138,7 @@ button {
 }
 
 button:hover {
-  background: rgba(26, 26, 26, 0.9);
+  background: rgba(57, 57, 57, 0.9);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
@@ -202,7 +207,7 @@ button:hover {
 .quote p {
   margin: 0;
   line-height: 1.5;
-  color: #1a1a1a;
+  color: #393939;
 }
 
 .quote-details {
