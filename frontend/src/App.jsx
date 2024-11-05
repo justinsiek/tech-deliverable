@@ -52,7 +52,10 @@ function App() {
 	return (
 		<div className="container">
 			<nav className="nav">
-				<img src={quotebookLogo} alt="logo" />
+				<div className="logo-container">
+					<img src={quotebookLogo} alt="logo" />
+					<h1>HackUCI Quotebook</h1>
+				</div>
 				<div className="add-quote-container">
 					{!showForm && <button onClick={() => setShowForm(!showForm)}>Add A Quote</button>}
 					{showForm && (
