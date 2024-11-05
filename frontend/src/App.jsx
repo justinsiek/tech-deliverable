@@ -13,25 +13,37 @@ function App() {
 			.catch((error) => console.error("Error fetching quotes:", error));
 	}, []);
 
+	const splitQuotes = (quotes) => {
+		const third = Math.ceil(quotes.length / 3);
+		return [
+			quotes.slice(0, third),
+			quotes.slice(third, third * 2),
+			quotes.slice(third * 2)
+		];
+	};
+
 	useEffect(() => {
 		const messagesContainers = document.querySelectorAll(".messages");
+		const quotesGroups = splitQuotes(quotes);
 		
-		messagesContainers.forEach(container => {
+		messagesContainers.forEach((container, index) => {
 			const quotesSlide = container.querySelector(".quotes-slide");
 			
-			if (quotesSlide && quotes.length > 0) {
+			if (quotesSlide && quotesGroups[index].length > 0) {
 				const existingClones = container.querySelectorAll(".quotes-slide:not(:first-child)");
 				existingClones.forEach(clone => clone.remove());
-				
-				const totalWidth = Array.from(quotesSlide.children)
-					.reduce((sum, quote) => sum + quote.offsetWidth + 10, 0);
-				
-				const copy = quotesSlide.cloneNode(true);
-				container.appendChild(copy);
-				
-				container.style.setProperty('--slide-width', `${totalWidth - 10}px`);
-				//const duration = totalWidth / 50;
-				//container.style.setProperty('--slide-duration', `${duration}s`);
+
+				setTimeout(() => {
+					const totalWidth = Array.from(quotesSlide.children)
+						.reduce((sum, quote) => sum + quote.offsetWidth + 10, 0);
+					
+					const copy = quotesSlide.cloneNode(true);
+					container.appendChild(copy);
+
+					container.style.setProperty('--slide-width', `${totalWidth}px`);
+					const duration = totalWidth / 150;
+					container.style.setProperty('--slide-duration', `${duration}s`);
+				}, 0);
 			}
 		});
 	}, [quotes]);
@@ -49,42 +61,20 @@ function App() {
 			</form>
 			*/}
 
-			<div className="messages">
-				<div className="quotes-slide">
-					{quotes.map((quote, index) => (
-						<div key={index} className="quote">
-							<p>{quote.message}</p>
-							<p className="quote-details">
-								- {quote.name} ({new Date(quote.time).toLocaleDateString()})
-							</p>
-						</div>
-					))}
+			{splitQuotes(quotes).map((quoteGroup, groupIndex) => (
+				<div key={groupIndex} className="messages">
+					<div className="quotes-slide">
+						{quoteGroup.map((quote, index) => (
+							<div key={`${groupIndex}-${index}`} className="quote">
+								<p>{quote.message}</p>
+								<p className="quote-details">
+									- {quote.name} ({new Date(quote.time).toLocaleDateString()})
+								</p>
+							</div>
+						))}
+					</div>
 				</div>
-			</div>
-			<div className="messages">
-				<div className="quotes-slide">
-					{quotes.map((quote, index) => (
-						<div key={index} className="quote">
-							<p>{quote.message}</p>
-							<p className="quote-details">
-								- {quote.name} ({new Date(quote.time).toLocaleDateString()})
-							</p>
-						</div>
-					))}
-				</div>
-			</div>
-			<div className="messages">
-				<div className="quotes-slide">
-					{quotes.map((quote, index) => (
-						<div key={index} className="quote">
-							<p>{quote.message}</p>
-							<p className="quote-details">
-								- {quote.name} ({new Date(quote.time).toLocaleDateString()})
-							</p>
-						</div>
-					))}
-				</div>
-			</div>
+			))}
 		</div>
 	);
 }

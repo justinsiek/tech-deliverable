@@ -83,13 +83,12 @@ button:hover {
 
 .quotes-slide {
   display: inline-block;
-  animation: slide 35s infinite linear;
+  animation: slide var(--slide-duration) infinite linear;
 }
 
 .quotes-slide:nth-child(2) {
   position: absolute;
   left: var(--slide-width);
-  top: 10px;
 }
 
 .quote {
