@@ -1,13 +1,19 @@
+import { useState, useEffect } from "react";
 import "./App.css";
 
 function App() {
-	return (
-		<div className="App">
-			{/* TODO: include an icon for the quote book */}
-			<h1>Hack at UCI Tech Deliverable</h1>
+	const [quotes, setQuotes] = useState([]);
+	const [maxAge, setMaxAge] = useState(10000);
 
-			<h2>Submit a quote</h2>
-			{/* TODO: implement custom form submission logic to not refresh the page */}
+	useEffect(() => {
+		fetch(`/api/quotes?max_age=${maxAge}`)
+			.then((response) => response.json())
+			.then((data) => setQuotes(data))
+			.catch((error) => console.error("Error fetching quotes:", error));
+	}, []);
+
+	return (
+		<>
 			<form action="/api/quote" method="post">
 				<label htmlFor="input-name">Name</label>
 				<input type="text" name="name" id="input-name" required />
@@ -16,14 +22,17 @@ function App() {
 				<button type="submit">Submit</button>
 			</form>
 
-			<h2>Previous Quotes</h2>
-			{/* TODO: Display the actual quotes from the database */}
 			<div className="messages">
-				<p>Peter Anteater</p>
-				<p>Zot Zot Zot!</p>
-				<p>Every day</p>
+				{quotes.map((quote, index) => (
+					<div key={index} className="quote">
+						<p>{quote.message}</p>
+						<p className="quote-details">
+							- {quote.name} ({new Date(quote.time).toLocaleDateString()})
+						</p>
+					</div>
+				))}
 			</div>
-		</div>
+		</>
 	);
 }
 
