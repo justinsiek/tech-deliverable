@@ -144,7 +144,7 @@ button:hover {
 
 .messages {
   overflow: hidden;
-  padding: 5px 0;
+  padding: 7px 0;
   white-space: nowrap;
   position: relative;
   width: 100%;
@@ -162,12 +162,12 @@ button:hover {
 
 .messages:before {
   left: 0;
-  background: linear-gradient(to right, rgba(255, 255, 255, 0.3), transparent);
+  background: linear-gradient(to right, rgba(255, 255, 255, 0.2), transparent);
 }
 
 .messages:after {
   right: 0;
-  background: linear-gradient(to left, rgba(255, 255, 255, 0.3), transparent);
+  background: linear-gradient(to left, rgba(255, 255, 255, 0.2), transparent);
 }
 
 .messages:hover .quotes-slide {
