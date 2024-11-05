@@ -4,8 +4,15 @@ import quotebookLogo from './assets/quotebook.jpg';
 
 function App() {
 	const [quotes, setQuotes] = useState([]);
-	const [maxAge, setMaxAge] = useState(100000);
+	const [maxAge, setMaxAge] = useState(36500);
 	const [showForm, setShowForm] = useState(false);
+
+	const timeFilters = [
+		{ label: 'Last Week', days: 7 },
+		{ label: 'Last Month', days: 30 },
+		{ label: 'Last Year', days: 365 },
+		{ label: 'All Time', days: 36500 },
+	];
 
 	useEffect(() => {
 		fetch(`/api/quotes?max_age=${maxAge}`)
@@ -70,20 +77,36 @@ function App() {
 				</div>
 			</nav>
 
-			{splitQuotes(quotes).map((quoteGroup, groupIndex) => (
-				<div key={groupIndex} className="messages">
-					<div className="quotes-slide">
-						{quoteGroup.map((quote, index) => (
-							<div key={`${groupIndex}-${index}`} className="quote">
-								<p>"{quote.message}"</p>
-								<p className="quote-details">
-									- {quote.name} ({new Date(quote.time).toLocaleDateString()})
-								</p>
-							</div>
-						))}
+			<div className="carousels-container">
+				{splitQuotes(quotes).map((quoteGroup, groupIndex) => (
+					<div key={groupIndex} className="messages">
+						<div className="quotes-slide">
+							{quoteGroup.map((quote, index) => (
+								<div key={`${groupIndex}-${index}`} className="quote">
+									<p>"{quote.message}"</p>
+									<p className="quote-details">
+										- {quote.name} ({new Date(quote.time).toLocaleDateString()})
+									</p>
+								</div>
+							))}
+						</div>
 					</div>
+				))}
+			</div>
+
+			<footer className="footer">
+				<div className="filter-container">
+					{timeFilters.map((filter) => (
+						<button
+							key={filter.days}
+							onClick={() => setMaxAge(filter.days)}
+							className={maxAge === filter.days ? 'active' : ''}
+						>
+							{filter.label}
+						</button>
+					))}
 				</div>
-			))}
+			</footer>
 		</div>
 	);
 }

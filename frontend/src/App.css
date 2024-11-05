@@ -18,6 +18,8 @@ body, html {
   width: 100%;
   margin: 0;
   padding: 5px 0;
+  display: flex;
+  flex-direction: column;
 }
 .nav {
   width: 80%;
@@ -135,11 +137,46 @@ button {
   font-size: 1rem;
   cursor: pointer;
   transition: all 0.2s;
+  position: relative;
+  overflow: hidden;
 }
 
 button:hover {
   background: rgba(57, 57, 57, 0.9);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -75%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgba(255, 255, 255, 0.3),
+    transparent
+  );
+  transform: skewX(-25deg);
+  transition: 0.5s;
+  opacity: 0;
+}
+
+button:hover::before {
+  animation: shine 0.75s;
+}
+
+@keyframes shine {
+  0% {
+    left: -75%;
+    opacity: 1;
+  }
+  100% {
+    left: 125%;
+    opacity: 1;
+  }
 }
 
 .messages {
@@ -189,7 +226,7 @@ button:hover {
   min-width: 300px;
   max-width: 600px;
   width: fit-content;
-  height: 25vh;
+  height: 23vh;
   margin-inline: 5px;
   vertical-align: top;
   white-space: normal;
@@ -226,4 +263,35 @@ button:hover {
   to {
     transform: translateX(calc(-1 * var(--slide-width)));
   }
+}
+
+.footer {
+  margin-top: 1rem;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-top: 1px solid rgba(255, 255, 255, 0.3);
+  padding: 1rem;
+  z-index: 10;
+}
+
+.filter-container {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.filter-container button {
+  background: rgba(65, 65, 65, 0.5);
+  padding: 0.5rem 1rem;
+}
+
+.filter-container button.active {
+  background: rgba(65, 65, 65, 0.9);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
