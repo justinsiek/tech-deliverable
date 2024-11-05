@@ -224,7 +224,7 @@ button:hover::before {
 .quote {
   display: inline-block;
   min-width: 300px;
-  max-width: 600px;
+  max-width: 750px;
   width: fit-content;
   height: 23vh;
   margin-inline: 5px;
@@ -251,7 +251,7 @@ button:hover::before {
   margin-top: 1rem !important;
   color: #414141;
   font-style: italic;
-  font-size: 0.9rem;
+  font-size: 0.8rem;
   position: absolute;
   bottom: 1rem;
 }

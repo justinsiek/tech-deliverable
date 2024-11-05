@@ -22,24 +22,54 @@ function App() {
 	}, [maxAge]);
 
 	const splitQuotes = (quotes) => {
-		const third = Math.ceil(quotes.length / 3);
-		return [
-			quotes.slice(0, third),
-			quotes.slice(third, third * 2),
-			quotes.slice(third * 2)
-		];
+		if (quotes.length <= 7) {
+			return [quotes];
+		} else if (quotes.length <= 15) {
+			const half = Math.ceil(quotes.length / 2);
+			return [
+				quotes.slice(0, half),
+				quotes.slice(half)
+			];
+		} else {
+			const third = Math.ceil(quotes.length / 3);
+			return [
+				quotes.slice(0, third),
+				quotes.slice(third, third * 2),
+				quotes.slice(third * 2)
+			];
+		}
 	};
 
 	useEffect(() => {
 		const messagesContainers = document.querySelectorAll(".messages");
 		const quotesGroups = splitQuotes(quotes);
 		
+		messagesContainers.forEach(container => {
+			const slides = container.querySelectorAll(".quotes-slide");
+			slides.forEach(slide => {
+				slide.remove();
+			});
+		});
+
 		messagesContainers.forEach((container, index) => {
-			const quotesSlide = container.querySelector(".quotes-slide");
+			// Create new quotes-slide
+			const quotesSlide = document.createElement("div");
+			quotesSlide.className = "quotes-slide";
 			
-			if (quotesSlide && quotesGroups[index].length > 0) {
-				const existingClones = container.querySelectorAll(".quotes-slide:not(:first-child)");
-				existingClones.forEach(clone => clone.remove());
+			if (quotesGroups[index]?.length > 0) {
+				quotesGroups[index].forEach((quote, quoteIndex) => {
+					const quoteDiv = document.createElement("div");
+					quoteDiv.className = "quote";
+					quoteDiv.innerHTML = `
+						<p>"${quote.message}"</p>
+						<p class="quote-details">
+							- ${quote.name} (${new Date(quote.time).toLocaleDateString()})
+						</p>
+					`;
+					quotesSlide.appendChild(quoteDiv);
+				});
+
+				container.appendChild(quotesSlide);
 
 				setTimeout(() => {
 					const totalWidth = Array.from(quotesSlide.children)
