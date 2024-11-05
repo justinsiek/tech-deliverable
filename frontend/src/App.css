@@ -7,7 +7,34 @@
   justify-content: space-between;
   align-items: center;
   margin: 1rem 0;
-  padding: 0 1rem;
+  padding: 0 0.5rem;
+}
+
+
+.add-quote-container {
+  position: relative;
+  overflow: hidden;
+  padding-left: 7rem;
+}
+
+.add-quote-container form {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.inputs-container {
+  display: flex;
+  gap: 0.5rem;
+  animation: slideIn 0.7s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(120%);
+  }
+  to {
+    transform: translateX(0);
+  }
 }
 
 img {
@@ -32,9 +59,27 @@ label {
 
 input {
   padding: 0.8rem;
-  border: 1px solid #1a1a1a;;
-  border-radius: 4px;
+  border: 1px solid #1a1a1a;
+  border-radius: 8px;
   font-size: 1rem;
+}
+
+input:focus {
+  outline: none;
+  border-color: #414141;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+input::placeholder {
+  color: #666;
+}
+
+#input-name {
+  width: 150px;
+}
+
+#input-message {
+  width: 300px;
 }
 
 button {
@@ -42,7 +87,7 @@ button {
   background-color: #414141;
   color: white;
   border: none;
-  border-radius: 4px;
+  border-radius: 8px;
   font-size: 1rem;
   cursor: pointer;
   transition: background-color 0.2s;

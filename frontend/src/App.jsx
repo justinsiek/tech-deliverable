@@ -53,14 +53,18 @@ function App() {
 		<div className="container">
 			<nav className="nav">
 				<img src={quotebookLogo} alt="logo" />
-				<button onClick={() => setShowForm(!showForm)}>Add A Quote</button>
-				{showForm && (
-					<form action="/api/quote" method="post">
-						<input placeholder="Name" type="text" name="name" id="input-name" required />
-						<input placeholder="Quote" type="text" name="message" id="input-message" required />
-						<button type="submit">Submit</button>
-					</form>
-				)}
+				<div className="add-quote-container">
+					{!showForm && <button onClick={() => setShowForm(!showForm)}>Add A Quote</button>}
+					{showForm && (
+						<form action="/api/quote" method="post">
+							<div className="inputs-container">
+								<input placeholder="Name..." type="text" name="name" id="input-name" required />
+								<input placeholder="Quote..." type="text" name="message" id="input-message" required />
+							</div>
+							<button type="submit">Submit</button>
+						</form>
+					)}
+				</div>
 			</nav>
 
 			{splitQuotes(quotes).map((quoteGroup, groupIndex) => (
