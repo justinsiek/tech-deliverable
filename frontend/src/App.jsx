@@ -5,13 +5,14 @@ import quotebookLogo from './assets/quotebook.jpg';
 function App() {
 	const [quotes, setQuotes] = useState([]);
 	const [maxAge, setMaxAge] = useState(100000);
+	const [showForm, setShowForm] = useState(false);
 
 	useEffect(() => {
 		fetch(`/api/quotes?max_age=${maxAge}`)
 			.then((response) => response.json())
 			.then((data) => setQuotes(data))
 			.catch((error) => console.error("Error fetching quotes:", error));
-	}, []);
+	}, [maxAge]);
 
 	const splitQuotes = (quotes) => {
 		const third = Math.ceil(quotes.length / 3);
@@ -41,7 +42,7 @@ function App() {
 					container.appendChild(copy);
 
 					container.style.setProperty('--slide-width', `${totalWidth}px`);
-					const duration = totalWidth / 150;
+					const duration = totalWidth / 80;
 					container.style.setProperty('--slide-duration', `${duration}s`);
 				}, 0);
 			}
@@ -50,23 +51,24 @@ function App() {
 
 	return (
 		<div className="container">
-			<img src={quotebookLogo} alt="logo" />
-			{/*
-			<form action="/api/quote" method="post">
-				<label htmlFor="input-name">Name</label>
-				<input type="text" name="name" id="input-name" required />
-				<label htmlFor="input-message">Quote</label>
-				<input type="text" name="message" id="input-message" required />
-				<button type="submit">Submit</button>
-			</form>
-			*/}
+			<nav className="nav">
+				<img src={quotebookLogo} alt="logo" />
+				<button onClick={() => setShowForm(!showForm)}>Add A Quote</button>
+				{showForm && (
+					<form action="/api/quote" method="post">
+						<input placeholder="Name" type="text" name="name" id="input-name" required />
+						<input placeholder="Quote" type="text" name="message" id="input-message" required />
+						<button type="submit">Submit</button>
+					</form>
+				)}
+			</nav>
 
 			{splitQuotes(quotes).map((quoteGroup, groupIndex) => (
 				<div key={groupIndex} className="messages">
 					<div className="quotes-slide">
 						{quoteGroup.map((quote, index) => (
 							<div key={`${groupIndex}-${index}`} className="quote">
-								<p>{quote.message}</p>
+								<p>"{quote.message}"</p>
 								<p className="quote-details">
 									- {quote.name} ({new Date(quote.time).toLocaleDateString()})
 								</p>
