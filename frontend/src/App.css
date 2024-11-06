@@ -13,7 +13,7 @@ body, html {
 }
 
 .container {
-  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  background: linear-gradient(135deg, #f5f7fa 0%, #8fa5cc 100%);
   min-height: 100vh;
   width: 100%;
   margin: 0;
@@ -21,6 +21,7 @@ body, html {
   display: flex;
   flex-direction: column;
 }
+
 .nav {
   width: 80%;
   margin: 1rem auto;
@@ -64,37 +65,17 @@ h1 {
   gap: 0.5rem;
 }
 
+.form-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
 .inputs-container {
   display: flex;
   gap: 0.5rem;
+  align-items: center;
   animation: slideIn 0.5s cubic-bezier(0.34, 1.2, 0.64, 1);
-}
-
-@keyframes slideIn {
-  from {
-    transform: translateX(120%);
-  }
-  to {
-    transform: translateX(0);
-  }
-}
-
-img {
-  max-width: 50px;
-  background: rgba(255, 255, 255, 0.2);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  border-radius: 8px;
-  padding: 0.5rem;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-
-label {
-  text-align: left;
-  font-weight: 600;
-  color: #1a1a1a;;
 }
 
 input {
@@ -146,37 +127,20 @@ button:hover {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
-button::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -75%;
-  width: 50%;
-  height: 100%;
-  background: linear-gradient(
-    to right,
-    transparent,
-    rgba(255, 255, 255, 0.3),
-    transparent
-  );
-  transform: skewX(-25deg);
-  transition: 0.5s;
-  opacity: 0;
+.close-button {
+  background: rgba(65, 65, 65, 0.5);
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  line-height: 1;
 }
 
-button:hover::before {
-  animation: shine 0.75s;
-}
-
-@keyframes shine {
-  0% {
-    left: -75%;
-    opacity: 1;
-  }
-  100% {
-    left: 125%;
-    opacity: 1;
-  }
+.close-button:hover {
+  background: rgba(255, 92, 92, 0.6);
 }
 
 .messages {
@@ -205,10 +169,6 @@ button:hover::before {
 .messages:after {
   right: 0;
   background: linear-gradient(to left, rgba(255, 255, 255, 0.2), transparent);
-}
-
-.messages:hover .quotes-slide {
-  animation-play-state: paused;
 }
 
 .quotes-slide {
@@ -256,15 +216,6 @@ button:hover::before {
   bottom: 1rem;
 }
 
-@keyframes slide {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(calc(-1 * var(--slide-width)));
-  }
-}
-
 .footer {
   margin-top: 1rem;
   bottom: 0;
@@ -294,4 +245,91 @@ button:hover::before {
 .filter-container button.active {
   background: rgba(65, 65, 65, 0.9);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.filter-container button:hover {
+  background: rgba(100, 100, 100, 0.9);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(120%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideOut {
+  0% {
+    transform: translateX(0);
+  }
+  15% {
+    transform: translateX(-5%);
+  }
+  100% {
+    transform: translateX(120%);
+  }
+}
+
+@keyframes slide {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(calc(-1 * var(--slide-width)));
+  }
+}
+
+@keyframes shine {
+  0% {
+    left: -75%;
+    opacity: 1;
+  }
+  100% {
+    left: 125%;
+    opacity: 1;
+  }
+}
+
+.messages:hover .quotes-slide {
+  animation-play-state: paused;
+}
+
+.inputs-container.sliding-out {
+  animation: slideOut 0.8s cubic-bezier(0.34, 1.2, 0.64, 1);
+}
+
+.nav button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -75%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgba(255, 255, 255, 0.3),
+    transparent
+  );
+  transform: skewX(-25deg);
+  transition: 0.5s;
+  opacity: 0;
+}
+
+button:hover::before {
+  animation: shine 0.75s;
+}
+
+img {
+  max-width: 50px;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 8px;
+  padding: 0.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
