@@ -2,9 +2,9 @@ import { useEffect } from 'react';
 
 const Quotes = ({ quotes }) => {
   const splitQuotes = (quotes) => {
-    if (quotes.length <= 7) {
+    if (quotes.length <= 6) {
       return [quotes];
-    } else if (quotes.length <= 14) {
+    } else if (quotes.length <= 12) {
       const half = Math.ceil(quotes.length / 2);
       return [
         quotes.slice(0, half),

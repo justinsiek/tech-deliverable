@@ -21,7 +21,7 @@ function App() {
 		fetch(`/api/quotes?max_age=${maxAge}`)
 			.then((response) => response.json())
 			.then((data) => setQuotes(data))
-			.catch(alert("error fetching quotes :( try again later"));
+			.catch((error) => console.error("error fetching quotes :( try again later", error));
 	}, [maxAge]);
 
 	const handleSubmit = async (e) => {
@@ -43,7 +43,7 @@ function App() {
 				setShowForm(false);
 			}
 		} catch (error) {
-			alert("error submitting quote :( try again later");
+			console.error("error submitting quote :( try again later", error);
 		}
 	};
 
